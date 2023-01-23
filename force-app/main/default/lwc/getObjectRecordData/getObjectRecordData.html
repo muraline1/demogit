@@ -1,0 +1,44 @@
+<template>
+    <lightning-card title="Deleting Multiple Contact Records Using Checkbox in LWC" icon-name="custom:custom14">
+                    
+        <lightning-datatable  data={wireContact.data}  columns={columns} key-field="Id"  onrowselection={getSelectedIdAction}  > </lightning-datatable>
+
+        <div slot="footer"> 
+            <lightning-button title="Delete" label="Delete" size="small" variant="brand" icon-name="utility:delete" icon-position="right" onclick={deleteContactRowAction}></lightning-button>
+            <lightning-button title="Edit" label="edit" size="small" variant="brand" icon-name="utility:delete" icon-position="right" onclick={editContactRowAction}></lightning-button>
+        </div>
+    </lightning-card>
+    <template if:true={isModalClose}>
+        <!-- <template for:each={selectedContactIdList} for:item='field'>
+            <lightning-layout-item  key={field.name}>
+        <lightning-record-form object-api-name={Contact}
+        onsubmit={handleSubmit}
+        record-id={recordId}
+        mode="edit"> 
+        </lightning-record-form> 
+        </lightning-layout-item>
+        </template> -->
+        <template for:each={selectedContactIdList} for:item='field'>
+            <lightning-layout-item  key={field.name}>
+            <!-- <lightning-datatable
+                key-field="Id"
+                data={selectedContactIdList}
+                columns={columns}
+                onsave={handleSave}
+                draft-values={selectedContactIdList}
+                hide-checkbox-column="true"
+                > 
+            </lightning-datatable> -->
+                <lightning-record-form record-id={selectedContactIdList.Id}
+                object-api-name={objectApiName}
+                fields={fields}>
+                    columns="3"
+                    mode="edit"
+                    onsubmit={handleSubmit}
+                </lightning-record-form> 
+           
+        </lightning-layout-item>
+        </template>
+        </template>
+        
+</template>

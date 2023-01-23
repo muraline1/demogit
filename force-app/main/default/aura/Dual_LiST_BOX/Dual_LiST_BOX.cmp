@@ -1,0 +1,28 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:attribute name="checkboxoptions" type="List" default="[
+        { label: 'All', value: 'All' },
+        { label: 'Two', value: 'Two' },
+        { label: 'Three', value: 'Three'},
+        { label: 'Four', value: 'Four' },
+        { label: 'Five', value: 'Five' }]"/>
+    <aura:attribute name="options" type="List" default="[
+        { label: 'All', value: 'All' },
+        { label: 'Custom', value:'Custom' }]"/>
+    <aura:attribute name="value" type="String" default="option1"/>
+<lightning:radioGroup name="radioGroupDisabled"
+                          label="Radio Group"
+                          options="{! v.options.disabled  }"
+                          value="{! v.value }"
+                          type="radio"
+                          onchange="{!c.handleChanges}"/>
+    
+    <lightning:dualListbox name="languages"
+                           label= "Select Option"
+                           sourceLabel="Available"
+                           selectedLabel="Selected"
+                           fieldLevelHelp="Select your preferred option"
+                           options="{!v.checkboxoptions}"
+                           onchange="{! c.handleChange }"/>
+    
+    
+</aura:component>

@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="wire getRecord">
+        <template if:true={murali.data}>
+            <template for:each={murali.data} for:item=ac>
+                <p key={ac.Id}> Name :{ac.Name}===>Phone:{ac.Phone}==>Industry:{ac.Industry}</p>
+            </template>
+
+        </template>
+
+    </lightning-card>
+</template>

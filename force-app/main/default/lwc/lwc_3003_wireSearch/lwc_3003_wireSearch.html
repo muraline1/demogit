@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="wire a property">
+        <lightning-input label="Enter name" type="search" onchange={serchme}></lightning-input>
+
+        ****************Result**************************
+        <template if:true={contacts.data}>
+            <template  for:each={contacts.data} for:item="con">
+                <p key={con.id}> {con.Name}</p>
+
+            </template>
+
+        </template>
+ 
+    </lightning-card>
+
+
+    <lightning-card title="wire a function">
+        <lightning-input label="Enter name" type="search" onchange={serchme}></lightning-input>
+
+        ****************Result**************************
+      
+            <template  for:each={contacts.data} for:item="con1">
+                <p key={con1.id}> {con1.Name}</p>
+
+            </template>
+
+      
+ 
+    </lightning-card>
+</template>

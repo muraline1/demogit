@@ -1,0 +1,68 @@
+<template>
+    <lightning-card>
+        <lightning-tabset>
+            <lightning-tab label="Select Object">
+                <!-- <lightning-datatable class="slds-border_top" key-field="id" data={objectOptions} columns={columns}
+                        onrowaction={handleRowAction}>
+                </lightning-datatable> -->
+                <lightning-combobox  name = "Select Object" value={value} placeholder="Choose objects" options={objectOptions} onchange={handleobjects} >
+                </lightning-combobox>
+                <lightning-dual-listbox name="object"
+                label="Select field"
+                value={value}
+                source-label="Available"
+                selected-label="Selected"
+                field-level-help="Select your fields"
+                options={Options}
+                onchange={handlefields}></lightning-dual-listbox>
+                <div class="slds-box" >
+                    <p>Selected values are: {selected}</p>
+                    
+                </div>
+                
+                <lightning-button variant="brand" label="view from" onclick={handleClick}></lightning-button>
+                <!-- <lightning-record-form
+    object-api-name={objectOptions}
+    record-id={recordId}
+    fields={selected}
+>
+</lightning-record-form> -->
+            </lightning-tab>
+        </lightning-tabset>
+ 
+    <template if:true={isModalClose}>
+   
+       
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+          <template for:each={selected} for:item='field'>
+          <lightning-layout-item  key={field.name}>
+            <lightning-record-form
+            record-id={selected.Id}
+             object-api-name={objectApiName}
+           
+            fields={selected}
+            mode="edit"> 
+           
+                    <!-- <lightning-input-field data-name="selected" key={field.selected} field-name={field.selected} value={field.selected} onchange={handleUpdate}></lightning-input-field> -->
+          
+        </lightning-record-form> 
+        </lightning-layout-item>
+          </template>
+        </div>
+    
+
+    </template>
+    <!-- <template if:true={data1}
+       
+            <lightning-dual-listbox name="object"
+            label="Select field"
+            value={value}
+            source-label="Available"
+            selected-label="Selected"
+            field-level-help="Select your fields"
+            options={Options}
+            onchange={handleChange}></lightning-dual-listbox>
+        
+    </template>    -->
+</lightning-card> 
+</template>

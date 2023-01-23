@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Display Security Quations " icon-name="standard:opportunity">
+ 
+        <div class="slds-m-around_medium" padding="around-small" size="12">
+     
+            <template if:true={OpportunityPicklist.data} >
+     
+                <lightning-combobox name="Security" label="Security Quations" value={StageValue}
+     
+                    options={OpportunityPicklist.data.values} onchange={handleChange} >
+                    <p>{boolVisible}</p>
+                   <!-- <template if:true={boolVisible} >
+                        <div class="slds-form-element__control"></div>
+                    <lightning-input type="text" label="Enter some text" onchange={handleInputChange}></lightning-input>
+                </template> -->
+                </lightning-combobox>
+     
+            </template> 
+             
+        </div>
+       </lightning-card>
+</template>
+     
+  
+</template>

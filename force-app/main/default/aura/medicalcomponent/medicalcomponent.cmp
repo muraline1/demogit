@@ -1,0 +1,196 @@
+<aura:component controller="MedicalController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<aura:attribute name="accList" type="List"/>
+    <aura:attribute name="medList" type="String" default="{}"/>
+    <aura:attribute name="medCount" type="List"/>
+    
+    <aura:attribute name="isModalOpen1" type="boolean" default="false"/>
+    <aura:attribute name="isModalOpen2" type="boolean" default="false"/>
+    <aura:attribute name="isCustomerFalse" type="boolean" default="false"/>
+   
+    <aura:attribute name="cMobile" type="String" default=""/>
+    <aura:attribute name="cName" type="String" default=""/>
+    
+    <aura:attribute name="cartList" type="List" default="[]"/>
+    
+    <aura:attribute name="total" type="Integer" default="0"/>
+    <aura:attribute name="count" type="Integer" default="0"/>
+   <aura:attribute name="activeSections" type="List" />
+   <aura:attribute name="searchResult" type="List" description="use for store and display account list return from server"/>
+   <aura:attribute name="searchKeyword" type="String" description="use for store user search input"/>
+   
+    <div style="margin-left:1200px;">
+        {!v.count}
+    	<lightning:icon iconName="utility:cart" alternativeText="Approved" title="Approved" />
+        
+    </div>
+   <div class="slds-border_bottom">
+      
+   </div>
+    
+    <div class="slds-grid slds-gutters">
+      <div class="slds-col slds-size_2-of-3">
+        <span>
+            <div class="slds-scrollable_y">
+          <div class="slds-text-longform">
+                        <lightning:input value="{!v.searchKeyword}"
+                placeholder="search Medicines.."
+                aura:id="searchField"
+                name="searchField"
+                label="Medicines"
+                onchange="{! c.onChange1 }"             />
+    
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                       <tr class="slds-text-title_caps">
+           
+          <th>Name</th> 
+                <th scope="col">Company</th> 
+                <th scope="col">Price</th> 
+                <th scope="col">Action</th> 
+                <th scope="col">Action</th> 
+                           </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.accList}" var="acc" indexVar="index">
+                            <tr>
+                                <td style="width:30%">
+                                    <div class="slds-truncate" title="">{!acc.Name}</div>
+                                </td>
+                                <td style="width:20%">
+                                    <div class="slds-truncate" title="">{!acc.company__c}</div>
+                                </td>
+                                <td style="width:20%">
+                                    <div class="slds-truncate" title="">{!acc.Price__c}</div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate" title="">
+                                        <button class="slds-button slds-button_brand">View</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate" title="">
+                                        <button data-row-index="{!index}" class="slds-button slds-button_brand" onclick="{!c.addMed}">Add</button>
+                                    </div>
+                                </td>
+                                
+    
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+          </div>
+       </div>  
+        </span>
+      </div>
+      <div class="slds-col slds-size_1-of-3">
+        	<div style="font-size:16px">Cart Items</div>
+          		<button  class="slds-button slds-button_destructive" onclick="{!c.handleClear}">Clear</button>
+          
+          		<aura:if isTrue="{!v.count>0}">
+          				<button  class="slds-button slds-button_brand" onclick="{!c.handleSell}">Sell</button>
+          		</aura:if>
+          		
+                <table class="cart slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                   <tr class="slds-text-title_caps">
+                    <th>Name</th>
+                    <th>Rate</th>
+                    <th>Quantity</th>
+                       <th>Price</th>
+                       <th>Remove</th>
+                   </tr>
+                        </thead>
+                    <tbody>
+                    <aura:iteration items="{!v.cartList}" var="item" indexVar="index">
+                        <tr>
+                            <td>
+                            	<div class="slds-truncate" title="">{!item.Name}</div>
+                            </td>
+                        	<td>
+                            	<div class="slds-truncate" title="">{!item.Price__c}</div>
+                            </td>
+                            <td>
+                            	<div class="slds-truncate" title="">{!item.qty}</div>
+                            </td>
+                            <td>
+                            	<div class="slds-truncate" title="">{!item.price}</div>
+                            </td>
+                            <td>
+                                <button data-row-index="{!index}" class="slds-button slds-button_brand" onclick="{!c.handleRemove}">X</button>
+                            </td>
+                        </tr>
+                        
+                    </aura:iteration>
+                        </tbody>
+                </table>
+            
+      </div>
+	</div>
+    
+    
+    <aura:if isTrue="{!v.isModalOpen1}">
+             
+            <!-- Modal/Popup Box starts here-->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Add customer</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning:input value="{!v.cMobile}"
+                            placeholder="Enter Mobile number..."
+                            aura:id="mobile"
+                            name="searchField"
+                            label="Mobile Number"
+                            />
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral"
+                                          label="Close"
+                                          title="Close"
+                                          onclick="{! c.closeModal1}"/>
+                        
+                        <lightning:button variant="brand"
+                                          label="Next"
+                                          title="Next"
+                                          onclick="{! c.next}"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:if>
+    
+    
+    
+     <aura:if isTrue="{!v.isModalOpen2}">
+             
+            <!-- Modal/Popup Box starts here-->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Add customer</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    
+                        <aura:if isTrue="{!v.isCustomerFalse}">
+                            <lightning:input type="text" placeholder="Name" value="{!v.cName}"/>
+                        </aura:if>
+
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral"
+                                          label="Close"
+                                          title="Close"
+                                          onclick="{! c.closeModal2}"/>
+                        <lightning:button variant="brand"
+                                          label="Save"
+                                          title="Save"
+                                          onclick="{! c.save}"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:if>
+    
+   
+</aura:component>

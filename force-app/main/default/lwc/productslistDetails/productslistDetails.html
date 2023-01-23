@@ -1,0 +1,69 @@
+<template>
+    <lightning-card title="poducts API - Get random iphone picture">
+        <!-- <div style="height: 300px;">
+            <template for:each={products.images} for:item="img">
+                <li key={img.Id}>
+                    <lightning-datatable class="image"
+        key-field="id"
+        data={products}
+        columns={Columns}>
+</lightning-datatable>
+                </li>
+            </template>
+       
+</div> -->
+<lightning-datatable class="image"
+            key-field="id"
+            data={products}
+            columns={Columns}>
+    </lightning-datatable>
+        <lightning-layout>
+            <div class="slds-p-around_small">
+                <lightning-button variant="success" 
+                    label="Generate Random iphone Picture"
+                    onclick={handleClick}>
+                </lightning-button>
+                <br>
+                <!-- <template if:true={imageReady}>
+                 
+                <p> <b>Title:{title}</b></p>    
+                 <lightning-carousel >
+                    <lightning-carousel-image  src = {pictureUrl}></lightning-carousel-image> 
+                    <lightning-carousel-image src = {pictureUrl1} ></lightning-carousel-image> 
+                    <lightning-carousel-image  src = {pictureUrl2} ></lightning-carousel-image>
+                    <lightning-carousel-image  src = {pictureUrl3} ></lightning-carousel-image> 
+                    <lightning-carousel-image  src = {pictureUrl4} ></lightning-carousel-image> 
+                            <img src={pictureUrl} height="350" width="350"/>
+                            <img src={pictureUrl1} height="350" width="350"/>
+                </lightning-carousel>
+                    <p><b>price:{price}</b></p> 
+                   
+                    
+                </template> -->
+                <!-- <template if:true={page}>
+                    {page.images}
+                    <lightning-textarea readonly value={page.title} rows="7" style="height:150px;"></lightning-textarea>
+                </template> -->
+                
+                <!-- <template if:true={loadingSpinner}>
+                    <lightning-spinner alternative-text="Loading" variant="inverse" size="medium"></lightning-spinner>
+                </template> -->
+            </div>
+        </lightning-layout>
+        <template for:each={products} for:item="products">
+            <li key={products.Id}>
+            <P></P>{products.title}{products.price}
+            
+            <template for:each={products.images} for:item="products">
+                <li key={products.images}>
+           
+                    <!-- <lightning-carousel >
+                        <lightning-carousel-image  src = {img} class="image"></lightning-carousel-image> 
+                    </lightning-carousel> -->
+                </li>
+            </template>
+        </li>
+        </template>
+       
+    </lightning-card>
+</template>

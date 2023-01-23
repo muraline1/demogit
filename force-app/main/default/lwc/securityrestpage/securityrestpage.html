@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="security quations">
+        <lightning-layout>
+            <lightning-layout-item padding="around-small" size="3">
+                <lightning-button label={clickedButtonLabel} onclick={handlsecurity} title="Show Security Quations"></lightning-button>
+                <template if:true={showaddress}>
+                    <div class="slds-grid">
+                        <lightning-input label="nagitive pale" onchange={security}></lightning-input>
+                    </div>
+                    </template>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>

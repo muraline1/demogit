@@ -1,0 +1,16 @@
+<template>
+    <div class="slds-m-around_medium">
+        <p class="slds-m-bottom_small">
+    <lightning-button label="edit" onclick={edit} size="small" variant="brand" icon-position="right"></lightning-button>
+    </p>
+    <template if:true={isModalClose}>
+        <select class="slds-select" id="select-01">
+            <template for:each = {products} for:item="product">
+               <option key={product.key} value={product.key}>{product.value}</option>
+            </template>
+       </select>
+   
+    </template>
+    </div>
+   
+</template>

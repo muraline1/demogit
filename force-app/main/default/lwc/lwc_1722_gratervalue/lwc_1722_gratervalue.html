@@ -1,0 +1,11 @@
+<template>
+    |<lightning-card title="grater value">
+        <lightning-input label="enter frist number" onchange={listnum1}></lightning-input>
+        <lightning-input label="enter second number" onchange={listnum2}></lightning-input>
+        <lightning-input label="enter third number" onchange={listnum3}></lightning-input>
+        <lightning-button label="calculate" variant="success" onclick={callme}></lightning-button>
+        <p>********************result******************************</p>
+
+        The grater Number= {result}
+    </lightning-card>
+</template>

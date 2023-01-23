@@ -1,0 +1,32 @@
+<template>
+    <lightning-radio-group name="Month"
+    label="Month"
+    options={options}
+    value={rcvalue}
+    type="radio"
+    onchange={handleChange}
+    ></lightning-radio-group>
+
+    <template if:false={isDisabled}>
+    <lightning-dual-listbox name="Checkbox Group"
+                              label="Checkbox Group"
+                              source-label="Available"
+                              selected-label="Selected"
+                              options={checkboxoptions}
+                              value={ckvalue}
+                              onchange={handleChanges}
+                              ></lightning-dual-listbox>
+                              </template>
+                      
+                              <template if:true={isDisabled}>
+                                <lightning-dual-listbox name="Checkbox Group"
+                                                          label="Checkbox Group"
+                                                          source-label="Available"
+                                                          selected-label="Selected"
+                                                          options={checkboxoptions}
+                                                          value={ckvalue}
+                                                          disabled
+                                                          onchange={handleChanges}
+                                                          ></lightning-dual-listbox>
+                                                          </template>
+</template>

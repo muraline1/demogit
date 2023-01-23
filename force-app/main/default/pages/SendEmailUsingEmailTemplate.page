@@ -1,0 +1,40 @@
+<apex:page controller="SendEmailWithEmailTemplate">
+    <apex:form id="frm">        
+        <apex:pageBlock title="" id="pb">            
+            <apex:pageblockButtons location="top">  
+                <input type="text" id="txtEmailAddress"/>
+                <apex:commandButton value="Send Email" onclick="sendEmail()" reRender="pb" />                
+            </apex:pageblockButtons>            
+        </apex:pageBlock>
+        <script>
+        function sendEmail(){  
+            var toEmailAddress=document.getElementById('txtEmailAddress').value;
+            if(toEmailAddress!=null && toEmailAddress!='' && toEmailAddress!=undefined){                
+                if(validateEmail(toEmailAddress)){
+                    SendEmailWithEmailTemplate.SendEmail(toEmailAddress,function(result,event){
+                        if(event.status){
+                            if(result=='SUCCESS'){
+                                alert('Email Sent Sucessfully');
+                            }
+                            else{
+                                alert(result);
+                            }
+                        }                
+                    });
+                }
+                else{
+                    alert('Please enter valid email address');
+                }
+            }
+            else{
+                alert('Please enter email address');
+            }
+        }
+        
+        function validateEmail(toEmailAddress){          
+            var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+            return reg.test(toEmailAddress);            
+        }
+        </script>
+    </apex:form>
+ </apex:page>

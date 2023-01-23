@@ -1,0 +1,33 @@
+<apex:page renderAs="pdf">
+   <html>
+<body> 
+   <apex:image id="theImage" value="{!$Resource.old}"/>	
+<p style="font-size:10px;"><b>INSURE</b></p>
+    <div style="font-size:10px;">Wanooka Place, St Andrews Road, Parktown, Johannesburg, 2193<br/>
+     style="font-size:10px;">Tel +27 (0)11 374 9111.<a href="www.ominsure.co.za">www.ominsure.co.za</a></div><br/>
+
+	<div>
+        
+     
+    Dear Sir/Madam <br/>
+Kindly find attached your Agreement of Loss in respect of your claim.
+Please sign and return the completed document to <a href="brokercorrespondence@ominsure.co.za">brokercorrespondence@ominsure.co.za</a> in order for us to process your claim.<br/>
+Kindly make sure that all future correspondence includes your claim number in the subject line of your email 123936127 to ensure prompt service.<br/>
+Should you have any queries in this regard, please contact Jill on 27115566675 between 08:00 and 16:30.<br/>
+Should you wish to escalate any matter or share a compliment, please do not hesitate to contact my manager <b>LOUISE WESTERMAN</b> on <b>27415083004</b> or or <a href="Louise.Westerman@ominsure.co.za">Louise.Westerman@ominsure.co.za</a>.<br/>
+Kind regards<br/>
+Name: Jill Freeman<br/>
+Tel: 27115566675<br/>
+    <strong>The Claims Team</strong><br/>
+	As part of the Protection of Personal Information Act regulation, and our compliance thereof, the attached document has been password protected.<br/><br/>
+
+    If you are a Broker please use your<i><b> FAIS number</b></i> to open the document.<br/>
+If you are a Policy Holder please use your<i><b> ID/passport number</b></i> to open the document.<br/>
+</div>
+    </body>
+</html>
+    <apex:form >
+   <apex:commandButton action="{!send}" value="send"/>
+   
+    </apex:form>
+</apex:page>

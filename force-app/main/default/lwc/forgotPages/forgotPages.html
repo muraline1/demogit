@@ -1,0 +1,27 @@
+<template>
+    <div class="slds-form-element__control"></div>
+    <lightning-card >
+        
+        <template if:true={TypePicklistValues.data}>
+            <template for:each={TypePicklistValues.data.values} for:item="item">
+                <p key={item.value}>{item.value}</p>
+                
+                <template for:each={TypeItemsFieldInfoOptions} for:item="item">
+                    
+                <lightning-input
+                    key={item.value}
+                    label={item.label}
+                    data-value={item.value}
+                    type="checkbox"
+                    onchange={handleChange}
+                    ></lightning-input>
+                    <template if:true={boolVisible} >
+                       
+                    </template>
+            </template>
+                </template>
+               
+        </template>
+        <lightning-input type="text" label="Enter some text" onchange={handleInputChange}></lightning-input>
+        </lightning-card>
+</template>

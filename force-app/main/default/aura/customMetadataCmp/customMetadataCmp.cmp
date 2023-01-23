@@ -1,0 +1,56 @@
+<aura:component controller="customMetadataCtrl" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>    
+    <aura:attribute name="metaList" type="new_Meta_Data__mdt[]"/>
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/> 
+    
+    <aura:attribute name="record" type="Object"/>
+    
+    
+    <div class="slds slds-p-around--medium">
+        
+        <lightning:card variant="Narrow" title="Metadata Action Row" iconName="custom:custom66">
+            
+            <lightning:datatable columns="{! v.columns }"
+                                 data="{! v.data }"
+                                 keyField="id"
+                                 onrowaction="{! c.metaActionRow}"
+                                 hideCheckboxColumn="true"/>
+        </lightning:card>  
+        
+        
+        
+        <div class="slds-hide" aura:id="metaRowPopupId" style="height: 340px; ">
+            <section class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick="{!c.handleCancelPopupClick }" title="Close">
+                            <lightning:icon iconName="utility:close" alternativeText="Approved" />
+                        </button>
+                        <h2 class="slds-text-heading_medium slds-hyphenate">Metadata Action Row</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <div class="slds-form slds-form_stacked">
+                             <div class="slds-form-element">
+                                <lightning:input type="text" name="MasterLabel" label="MasterLabel" value="{!v.record.MasterLabel}"/>
+                            </div>
+                            <div class="slds-form-element__control" >
+                                <lightning:input type="Phone" label="Phone" name="Phone" value="{!v.record.PhoneNo__c}"/>
+                            </div>
+                            <div class="slds-form-element__control" >
+                                <lightning:input type="Email" label="Email" name="Email" value="{!v.record.Emails__c}"/>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                         <lightning:button class="slds-button slds-button_destructive" label="Save" title="Save" onclick="{! c.handleSavePopupClick }"/>
+                        <lightning:button class="slds-button slds-button_destructive" label="Cancel" title="Cancel" onclick="{! c.handleCancelPopupClick }"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+        <br/>
+        </div>
+</aura:component>

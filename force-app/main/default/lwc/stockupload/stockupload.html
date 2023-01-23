@@ -1,0 +1,63 @@
+<template>
+    <template if:true={isLoaded}>
+        <lightning-spinner 
+            alternative-text="Loading" 
+            size="large">
+        </lightning-spinner>
+    </template>
+    <lightning-card variant="Narrow" icon-name="standard:file" title="File Upload">
+        <p class="slds-var-p-horizontal_small">
+            <lightning-file-upload 
+                accept={acceptedFormats} 
+                label="Attach CSV File" 
+                multiple="multiple" 
+                onuploadfinished={uploadFileHandler}>
+            </lightning-file-upload>
+        </p>
+    </lightning-card> 
+    
+            <lightning-button label="See report" variant="success" onclick={seereports} ></lightning-button>
+            
+                
+                <template if:true={isModalOpen}>
+                    <lightning-card title="data">
+
+                        <template if:true={murali.data}>
+                            <lightning-datatable 
+                            data={murali.data}
+                            columns={columns}
+                            key-field="id"
+                            >
+                            </lightning-datatable>
+                        </template>
+                        
+
+                    </lightning-card>
+                    <lightning-card title="over all profit">
+
+                        <template if:true={siva.data}>
+                            <lightning-datatable 
+                            data={siva.data}
+                            columns={columns}
+                            key-field="id"
+                            >
+                            </lightning-datatable>
+                        </template>
+                        
+
+                    </lightning-card>
+                    <lightning-card title="loss">
+
+                        <template if:true={kumar.data}>
+                            <lightning-datatable 
+                            data={kumar.data}
+                            columns={columns}
+                            key-field="id"
+                            >
+                            </lightning-datatable>
+                        </template>
+                        
+
+                    </lightning-card>
+                </template>
+</template>

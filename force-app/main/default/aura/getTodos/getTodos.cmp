@@ -1,0 +1,8 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="FetchRecords" >
+    <aura:attribute name="reg" type="ToDos__c[]"/>
+    <ui:button label="Todos record" press="{!c.myAction}"/>
+    <aura:iteration var="r" items="{!v.reg}" >
+    <p>{!r.Name}</p>
+    <p>{!r.Email__c}</p>
+    </aura:iteration>
+</aura:component>

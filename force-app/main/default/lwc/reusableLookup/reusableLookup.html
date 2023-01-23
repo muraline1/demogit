@@ -1,0 +1,16 @@
+<template>
+    <div class="slds-box">
+        <div class="slds-grid slds-gutters">
+        <div class="slds-col">
+        <label class="slds-form-element__label">Name</label>
+        <c-validat-Data-List field-name="Name" key-field="Id" object-name="AccountRelation__c" search-key="Name" >
+        </c-validat-Data-List>
+        </div>            
+        <div class="slds-col">
+        <label class="slds-form-element__label">toaccount</label>
+        <c-validat-Data-List field-name="Name" key-field="toaccount__c" 
+        object-name="AccountRelation__c" search-key="toaccount__c" ></c-validat-Data-List>
+        </div>
+        </div>
+        </div>
+</template>

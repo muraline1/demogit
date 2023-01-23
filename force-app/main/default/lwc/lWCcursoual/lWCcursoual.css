@@ -1,0 +1,13 @@
+div.LARGE {
+background: red;
+max-width: 1280px;
+
+}
+div.SMALL {
+  background: blue;
+ width: 560px;
+}
+div.MEDIUM{
+  background: blue;
+ width: 768px;
+}

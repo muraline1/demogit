@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="get values">
+        <template if:true={murali.data}>
+            <lightning-datatable key-field="Id" data={murali.data} columns={colum} onsave={saveme} draft-values={draftvalues} > 
+
+            </lightning-datatable>
+
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,48 @@
+<apex:page controller="PdfPageController">
+    
+   
+    <br/><br/><br/><br/><br/><br/>
+    
+    <div style="border:2px solid black;left:20px;top:20px;right:20px;bottom:20px;">
+        
+    <center>         
+        <div style="font-size:23px;font-weight:bold">
+            MANI MEDICALS
+        </div>
+        <br/>
+         
+        
+        <apex:pageBlock title="Bill"> Date : {!today()} <br/>
+   
+        
+     <br/><br/>
+            
+      <table border="0" style="font-size:18px;left:300px;" >
+        <tr>
+            <th style="font-size:18px;padding-left:20pxlpadding-bottom:10px">Name</th><th style="font-size:18px;padding-left:20px;padding-bottom:10px">Company</th>
+            <th style="font-size:18px;padding-left:30px;padding-bottom:10px">Rate</th><th style="font-size:18px;padding-left:30px;padding-bottom:10px">Qty</th><th style="font-size:18px;padding-left:30px;padding-bottom:10px">Total</th>
+        </tr>
+        <apex:repeat var="item" value="{!Par}">
+        <tr>
+            <td style="font-size:12px;padding-left:20pxlpadding-bottom:10px">{!item.name}</td>
+            <td style="font-size:12px;padding-left:20px;padding-bottom:10px">{!item.company}</td>
+            <td style="font-size:12px;padding-left:30px;padding-bottom:10px">{!item.rate}</td>
+            <td style="font-size:12px;padding-left:30px;padding-bottom:10px">{!item.qty}</td>
+            <td style="font-size:12px;padding-left:30px;padding-bottom:10px">{!item.price}</td>
+        </tr>
+        </apex:repeat> 
+    </table>
+      
+            <br/>
+            <div style="font-size:18px;font-weight:bold;text-align:right">
+                Total : {!Total}
+            </div>
+             
+   </apex:pageBlock>
+    
+    
+    </center>
+    
+                
+    </div>
+</apex:page>

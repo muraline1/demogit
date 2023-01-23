@@ -1,0 +1,202 @@
+<template>
+    <div class="slds-box slds-theme--default">
+       
+        
+        <div class="slds-float_left">        
+            <lightning-input type="search" onkeyup={handleKeyChange} class="slds-m-bottom_small" label="Search" maxlength="70">  
+            </lightning-input>  
+        </div>
+        <div class="slds-float_right">
+            {count}
+        <lightning-button-icon data-label="Cart" icon-name="utility:cart"  alternative-text="Save"  class="slds-m-left_xx-small"  onclick={closeModal}></lightning-button-icon>
+        </div>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="Name">
+                           Medicine Name
+                        </a>
+                    </th>
+                    <th class="" scope="col">
+                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="Rating">
+                            View/Add
+                        </a>
+                    </th>
+                    
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <template iterator:it={records}>
+                    <tr class="slds-hint-parent" key = {it.value.Id}>
+                        <td data-label="Medical Name">
+                            <div class="slds-cell-wrap">{it.value.Name}</div>
+                            <div class="slds-cell-wrap">{it.value.Rate_per_piece__c}</div>
+                            <div class="slds-cell-wrap">{it.value.quantity__c}</div>
+                        </td>
+                        <td data-label="view/add">
+                            
+                            <lightning-button label="View" data-index={it.value.Id} onclick={viewRecords}></lightning-button>
+                            <lightning-button label="Add" data-index={it.value.Id} data-name={it.value.Name} data-rate={it.value.Rate_per_piece__c} data-quantity={it.value.quantity__c} onclick={AddRecord}></lightning-button>
+                             
+                        </td>
+                        
+                      
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <!-- after click card button-->
+        <template if:true={isModalClose}>
+            <section aria-modal="true" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-float_right">
+                <lightning-button label="Edit"  onclick={isedit}></lightning-button>
+                <lightning-button label="clear"  onclick={isclear} > </lightning-button>
+             <lightning-button label="Resell"  onclick={issell} > </lightning-button>
+             <lightning-card >
+                
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                    <lightning-record-form record-id={recordId} object-api-name={objectApiName}
+                    fields={fields}  mode="edit" ></lightning-record-form>
+    
+                    <thead>
+                    <tr class="slds-line-height_reset">
+                        <th scope="col"><div class="slds-truncate">Actions</div></th>
+                        <th scope="col"><div class="slds-truncate">Id</div></th>
+                        <th scope="col"><div class="slds-truncate">Name</div></th>
+                        <th scope="col"><div class="slds-truncate">Rate_per_piece__c</div></th>
+                        <th scope="col"><div class="slds-truncate">quantity__c</div></th>
+                    </tr>
+                    </thead>
+            
+                    <tbody>
+                        <template for:each={arr} for:item="ssobKey" for:index="index">
+                            <tr key={ssobKey.Id}>
+                              <td>
+                                <div>
+                                  <lightning-button variant="brand" label="Remove" title="Primary action" onclick={handleClick} class="slds-m-left_x-small" data-index={index}></lightning-button> <!-- Added the data-index attribute here to use in JS. -->
+                                </div>
+                              </td>
+                            <td><div>{ssobKey.id}</div></td>
+                            <td><div>{ssobKey.Name}</div></td>
+                            <td><div>{ssobKey.Rate_per_piece__c}</div></td>
+                            <td><div>{ssobKey.quantity__c}</div></td>
+                    </tr>
+                   </template>
+                </tbody>
+                </table>
+            </lightning-card>
+            </header>
+            </div>
+            </section> 
+        </template>
+    
+<!-- after clicking view button -->
+<template if:true={isModalOpen}>
+
+    <section aria-modal="true" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-float_right">
+                <lightning-button-icon icon-name="utility:close"  alternative-text="Save" class="slds-m-left_xx-small" title="Close" onclick={closeModal}></lightning-button-icon>
+            </header>
+            
+                <lightning-record-view-form record-id={recordId} object-api-name="Medicine__c">
+<lightning-card>
+
+                </lightning-card>
+                 <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                    <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="Name">
+                               Medicine Name
+                            </a>
+                        </th>
+                       
+                        <th class="" scope="col">
+                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="AccountNumber">
+                                Category
+                            </a>
+                        </th>
+                        <th class="" scope="col">
+                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="Industry">
+                                frequency of sell
+                            </a>
+                        </th>
+                        <th class="" scope="col">
+                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="Rating">
+                                stock available
+                            </a>
+                        </th>
+                        <th class="" scope="col">
+                            <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0" onclick={sortRecs} name="Rating">
+                                Add
+                            </a>
+                        </th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        <tr class="slds-hint-parent">
+                            <td >
+                                <lightning-output-field field-name="Name"></lightning-output-field>
+                            </td>
+                            
+                            <td>
+                                <lightning-output-field field-name="Categor__c"></lightning-output-field>
+                            </td>
+                            <td>
+                                <lightning-output-field field-name="frequency_of_sell__c"></lightning-output-field>
+                            </td>
+                            <td >
+                                <lightning-output-field field-name="stock_available__c"></lightning-output-field>
+                            </td>
+
+                            
+                        </tr>
+                    
+                </tbody>
+                
+            </table> 
+          
+        </lightning-record-view-form>
+        
+          
+        </div>
+    </section>
+
+
+</template>
+    </div>
+    <lightning-card >
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+            <thead>
+            <tr class="slds-line-height_reset">
+                <th scope="col"><div class="slds-truncate">Actions</div></th>
+                <th scope="col"><div class="slds-truncate">Id</div></th>
+                <th scope="col"><div class="slds-truncate">Name</div></th>
+            </tr>
+            </thead>
+    
+            <tbody>
+            
+                <template for:each={sObjData} for:item="sobKey" for:index="index">
+                    <tr key={sobKey.Id}>
+                      <td>
+                        <div>
+                          <lightning-button variant="brand" label="Remove" title="Primary action" onclick={handleClick} class="slds-m-left_x-small" data-index={index}></lightning-button> <!-- Added the data-index attribute here to use in JS. -->
+                        </div>
+                      </td>
+                    <td><div>{sobKey.Id}</div></td>
+                    <td><div>{sobKey.Name}</div></td>
+    
+                    
+            </tr>
+           </template>
+        </tbody>
+        </table>
+    </lightning-card>
+</template>

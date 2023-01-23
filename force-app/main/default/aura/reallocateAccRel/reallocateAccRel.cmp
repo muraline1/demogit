@@ -1,0 +1,10 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="reallocateAccRel" >
+	 <aura:attribute name="reg" type="AccountRelation__c[]"/>
+    <ui:button label="AccountRelation record" press="{!c.myAction}"/>
+    <aura:iteration var="r" items="{!v.reg}" >
+    <p>{!r.Name}</p>
+    <p>{!r.Accnum__c}</p>
+    <p>{!r.fromaccount__c}</p>
+    <p>{!r.toaccount__c}</p>
+    </aura:iteration>
+</aura:component>

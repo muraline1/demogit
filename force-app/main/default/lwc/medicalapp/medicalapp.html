@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title = "Search Medicine" icon-name = "custom:custom63">  
+  
+        <div class = "slds-m-around_medium">  
+            <lightning-button-icon data-label="Cart" icon-name="utility:cart"  alternative-text="Save"  class="slds-m-left_xx-small"  onclick={closeModal}></lightning-button-icon>
+            <lightning-input type = "search" onchange = {handleKeyChange} class = "slds-m-bottom_small" label = "Search" >  
+            </lightning-input>  
+  
+            <template if:true = {accounts}>  
+                  
+                <div style="height: 300px;">  
+  
+                    <lightning-datatable key-field="Id"  
+                                         data={accounts}  
+                                         columns={columns}  
+                                         hide-checkbox-column="true"  
+                                         show-row-number-column="true"  
+                                         onrowaction={callRowAction}>  
+                    </lightning-datatable>  
+  
+                </div>                   
+      
+            </template>  
+      
+            <template if:true = {error}>  
+  
+                {error}>  
+                  
+            </template>  
+  
+        </div>  
+    </lightning-card> 
+</template>

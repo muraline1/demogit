@@ -1,0 +1,32 @@
+<aura:component controller="Cl_032022_AccountSearch" >
+	<aura:attribute name="stxt" type="String"/>
+    <aura:attribute name="acclist" type="Account[]"/>
+    
+    <aura:attribute name="col" type="List"/>
+    
+    <lightning:card title="Search Account Details">
+        <lightning:input label="Enter your Search Text" value="{!v.stxt}"/>
+        
+        <aura:set attribute="actions">
+            <lightning:button label="Search" onclick="{!c.searchme}"/>
+        </aura:set>
+    </lightning:card>
+    
+    <lightning:card title="Search Result">
+        <lightning:layout multipleRows="ture">
+            <aura:iteration items="{!v.acclist}" var="a">
+                <lightning:layoutItem size="3" padding="around-small">
+                    Name: {!a.Name}          <br/>
+                    Phone: {!a.Phone}        <br/>
+                    Fax:{!a.Fax}             <br/>
+                    Industry:{!a.Industry}   <br/>
+                </lightning:layoutItem>
+            </aura:iteration>
+           
+        </lightning:layout>
+          
+    </lightning:card>
+    <lightning:card title ="search result in tabular">
+        <lightning:dataTable keyField="id" data="{!v.acclist}" columns="{!v.col}"/>
+    </lightning:card>
+</aura:component>

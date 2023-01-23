@@ -1,0 +1,9 @@
+<template>
+    <lightning-card title="lwc parent calling child and passing var"> 
+        <lightning-input label="Name" onchange={nameme} value={pname}></lightning-input>
+        <lightning-input label="Age" onchange={age} value={page}></lightning-input>
+        <lightning-input label="City" onchange={city} value={pcity}></lightning-input>
+        <lightning-button label="submit" onclick={clickme}></lightning-button>
+    </lightning-card>
+    <c-publicvar empname={bname} empage={bage} empcity={bcity}></c-publicvar>
+</template>
